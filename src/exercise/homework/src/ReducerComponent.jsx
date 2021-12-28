@@ -1,4 +1,5 @@
 import {useReducer, useState} from 'react'
+import ReducerTask from './ReducerTask'
 import {taskReducer} from './taskReducer'
 
 const initialTasks = [
@@ -12,7 +13,11 @@ function ReducerComponent(props) {
   const [tasks, dispatch] = useReducer(taskReducer, initialTasks)
 
   function nextId(tasks) {
-    return Math.max(...tasks.map(task => parseFloat(task.id))) + 1
+    if (tasks.length === 0) {
+      return 1
+    } else {
+      return Math.max(...tasks.map(task => parseFloat(task.id))) + 1
+    }
   }
 
   function handleAddTask(event, text) {
@@ -27,12 +32,13 @@ function ReducerComponent(props) {
     )
   }
 
-  // function handleChangeTask(task) {
-  //     dispatch({
-  //       type: 'changed',
-  //       task: task
-  //     });
-  //   }
+  function handleChangeTask(event, task) {
+    event.preventDefault()
+    dispatch({
+      type: 'changed',
+      task: task,
+    })
+  }
 
   function handleDeleteTask(event, taskId) {
     event.preventDefault()
@@ -55,14 +61,12 @@ function ReducerComponent(props) {
         <button onClick={event => handleAddTask(event, input)}>Add Text</button>
       </form>
       {tasks.map(task => (
-        <div className="list-item">
-          <p key={task.id}>
-            {task.id}:{task.text}
-          </p>
-          <button onClick={event => handleDeleteTask(event, task.id)}>
-            Delete
-          </button>
-        </div>
+        <ReducerTask
+          key={task.id}
+          onChangeTask={handleChangeTask}
+          onDeleteTask={handleDeleteTask}
+          task={task}
+        />
       ))}
     </div>
   )
