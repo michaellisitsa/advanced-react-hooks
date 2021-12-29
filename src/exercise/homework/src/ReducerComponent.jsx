@@ -1,4 +1,5 @@
 import {useReducer, useState} from 'react'
+import {useImmerReducer} from 'use-immer'
 import ReducerTask from './ReducerTask'
 import {taskReducer} from './taskReducer'
 
@@ -10,7 +11,7 @@ const initialTasks = [
 
 function ReducerComponent(props) {
   const [input, setInput] = useState('')
-  const [tasks, dispatch] = useReducer(taskReducer, initialTasks)
+  const [tasks, dispatch] = useImmerReducer(taskReducer, initialTasks)
 
   function nextId(tasks) {
     if (tasks.length === 0) {
