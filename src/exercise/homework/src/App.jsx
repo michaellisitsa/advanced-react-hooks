@@ -1,7 +1,7 @@
 import './App.css'
 import ReducerComponent from './ReducerComponent'
 import Counter from './Counter'
-import PokemonWithUnmountCheckbox from './PokemonContainer'
+import PokemonCached from './PokemonCached'
 import ContextContainer from './ContextContainer'
 import HeadersContext from './HeadersContext'
 
@@ -11,7 +11,7 @@ function App() {
       <HeadersContext />
       <ReducerComponent />
       <Counter />
-      <PokemonWithUnmountCheckbox />
+      <PokemonCached />
       <ContextContainer />
     </div>
   )
